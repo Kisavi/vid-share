@@ -1,45 +1,31 @@
 {% extends 'registration/base.html' %} {% load bootstrap4 %} {% block content %} {% load static %}
-<div class="container mt-4">
+<section class="sign-u" style="border: 1px solid;  height: 100vh; background-image: url('https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+ background-position: center; background-repeat: no-repeat; background-size: cover;">
+<div class="container" style="margin-top: 7rem;">
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-title mt-4">
-                    <img src="" alt="" width="40%" class="D-block mx-auto">
+            <div class="card mb-4">
+                <div class=" mt-0">
+                   <h3 class="text-center" style="background: #EBECF0; padding: 1rem 0" >Vid share</h3>
                 </div>
                 <div class="card-body mb-3 mr-3 ml-3">
-                    <p class="text-center">Sign up.
-                    </p>
+                    <h6 class="text-center mb-3">Sign up
+                    </h6>
                     <form action="" method="post" novalidate>
                         {% csrf_token %} {% bootstrap_form form layout='inline' %}
                         <button type="submit" class="btn btn-primary btn-sm"> Sign up</button>
                     </form>
                 </div>
-                <p class="mr-4 ml-4 mb-2 text-center">By signing up, you have agree to our Terms and Conditions.
-                </p>
+                 <p class="text-center">Have an account? <a href="/login">Log in</a></p>
             </div>
-            <div class="card mt-2">
-                <div class="card-body mt-3 mb-2 mr-3 ml-3">
-                    <p>Have an account? <a href="/login">Log in</a></p>
-                </div>
-            </div>
-            <div container>
-                <p class="text-center mt-4">Get the app</p>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5 mb-2">
-                        <img src="https://e7.pngegg.com/pngimages/488/584/png-clipart-app-store-iphone-apple-mobile-app-iphone-electronics-text.png" alt="" width="100%" class="download">
-                    </div>
-                    <div class="col-md-5 mb-2">
-                        <img src="https://www.freepnglogos.com/uploads/play-store-logo-png/play-store-logo-nisi-filters-australia-11.png" alt="" width="100%" class="download">
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-            </div>
+
+
         </div>
 
         <div class="col-md-4"></div>
     </div>
 </div>
+    </section>
 
 {% endblock %}
