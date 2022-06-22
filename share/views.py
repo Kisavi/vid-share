@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from .forms import ProfileForm
-from django.http.response import Http404
 
 
 def profile(request, username):

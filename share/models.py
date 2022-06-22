@@ -6,7 +6,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from cloudinary.models import CloudinaryField
 
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True)
 
@@ -44,4 +43,26 @@ class Profile(models.Model):
     @classmethod
     def search_profile(cls, name):
         return cls.objects.filter(user__username__icontains=name).all()
+<<<<<<< HEAD
+=======
 
+class Follow(models.Model):
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='following')
+    followed = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='followers')
+
+    def __str__(self):
+        return f'{self.follower} Follow'
+
+
+class Comment(models.Model):
+    comment = models.TextField()
+    pub_date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='comment')
+    photo = models.ForeignKey('Image', on_delete=models.CASCADE, related_name='comment')
+
+    class Meta:
+        ordering = ["-pk"]
+
+    def __str__(self):
+        return f'{self.user.name} Image'
+>>>>>>> d70501f458c0ed7639cfd55325c7fc486b734c59
