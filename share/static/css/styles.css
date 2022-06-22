@@ -1,0 +1,18 @@
+  @import url('//fonts.cdnfonts.com/css/billabong');
+  .logo a {
+  color: #000000;
+  font-size: 30px;
+  font-family: "billabong", sans-serif;
+  text-decoration: none;
+}
+
+.reaction {
+display: flex;}
+
+.heart, .engage {
+  color: black !important;
+}
+
+.heart:hover {
+  color: red !important;
+}
