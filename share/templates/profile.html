@@ -1,0 +1,12 @@
+{%extends 'base.html' %} {% load bootstrap4 %} {% load static %} {% block styles %} {% bootstrap_css %} {% endblock %} {% block content %} {{ block.super }}
+
+{{ user.username}}
+{{images.count}} Posts {{ user.profile.followers.count }} followers {{ user.profile.following.count }} following
+{{ user.profile.bio}}
+
+{% for image in images %}
+...
+{{ image.caption }}
+
+{% endfor %}
+{% endblock %}
