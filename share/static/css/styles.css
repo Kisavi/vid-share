@@ -7,12 +7,15 @@
 }
 
 .reaction {
+  
 display: flex;}
 
 .heart, .engage {
+  
   color: black !important;
 }
 
 .heart:hover {
   color: red !important;
 }
+
