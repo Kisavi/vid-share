@@ -6,7 +6,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from cloudinary.models import CloudinaryField
 
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True)
 
@@ -44,4 +43,3 @@ class Profile(models.Model):
     @classmethod
     def search_profile(cls, name):
         return cls.objects.filter(user__username__icontains=name).all()
-
