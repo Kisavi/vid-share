@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+from django.urls import re_path as url
 
 urlpatterns = [
     
@@ -13,6 +14,7 @@ urlpatterns = [
     path('image/', views.post, name='post'),
     path('like/<id>', views.like_post, name='like'),
     path('image/<id>', views.comment, name='comment')
+
   
 ]
 
