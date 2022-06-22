@@ -15,7 +15,7 @@
 {% block content %}
 {{ block.super }}
 
-<div class="container" style="font-family: 'Forum', cursive;">
+<div class="container" style="font-family: 'Italic', cursive; ">
     <div class="row">
         <div class="col-7">
             {% for image in images %}
@@ -27,14 +27,16 @@
                 </div>
                 <div class="card-body">
                     <a href="{% url 'comment' image.id %}"><img src="{{ image.image_url }}" class="card-img-top"
-                            alt="..." height="320px" style="width: 100%;"></a>
-                    <div class="reaction mt-2">
+                            alt="..." height="320px" style="width: 100%; color: black;"></a>
+                    <div class="reaction mt-2 ">
                         
                         <a href="{%url 'like' image.id %}" class="heart mr-3">
-                            <i class='bx bx-heart bx-sm'></i>
+                            <i class='bx bxs-heart bx-border-circle'></i>
+
                         </a>
+                        
                             
-                        <a href="{% url 'comment' image.id %}" class="engage">
+                        <a href="{% url 'comment' image.id %}" class="engage ">
                             <i class='bx-sm bx bx-comment'></i>
                         </a>
                     </div>
@@ -42,7 +44,7 @@
                         <p><strong>{{image.user.user.username|title}}</strong></a> <span class="card-text">{{ image.caption }}</span> </p>
                     <p>{{user.comment.comments.count}}</p>
                     <h5>{{image.likes.count}} likes</h5>
-                    <p class="text-muted font-italic">{{image.pub_date}}</p>
+                    <p class="text-muted font-cursive">{{image.pub_date}}</p>
 
                 </div>
             </div>
