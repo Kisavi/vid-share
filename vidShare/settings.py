@@ -161,6 +161,12 @@ cloudinary.config(
 
 )
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 # social auth configs for google
