@@ -1,0 +1,11 @@
+{%extends 'base.html'%} {% load bootstrap4 %} {% load static %} {% block styles %} {% bootstrap_css %} {% endblock %} {% block content %}
+{% if results %}
+Found {{ results|length }} user{{ results|pluralize }}
+{% else %}
+Found 0 user with username {{message}}
+{% endif %}
+{% if results %} {% for user_profile in results %}
+
+{{user_profile.user.username}}
+{% endfor %} {% endif %}
+{% endblock %}

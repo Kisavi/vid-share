@@ -1,0 +1,13 @@
+{%extends 'base.html'%} {% load bootstrap4 %} {% load static %} {% block styles %} {% bootstrap_css %} {% endblock %} {% block content %} {{ block.super }}
+
+{{ user_prof.username }} {% if follow_status %}  {%else%}  {% endif %}
+{{user_posts.count}} Posts {{ user_prof.profile.followers.count }} Followers {{ user_prof.profile.following.count }} Following
+{{ user_prof.profile.name }}
+{{ user_prof.profile.bio }}
+
+{% if user_posts %} {% for image in user_posts %}
+...
+{% endfor %} {% else %}
+No posts yet
+{% endif %}
+{%endblock%}
