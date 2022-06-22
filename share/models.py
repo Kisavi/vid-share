@@ -46,6 +46,41 @@ class Profile(models.Model):
 <<<<<<< HEAD
 =======
 
+class Image(models.Model):
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='images')
+
+    name = models.CharField(max_length=30)
+    caption = models.CharField(max_length=30)
+    image = CloudinaryField('image')
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        ordering = ["-pk"]
+
+    @classmethod
+    def images(cls):
+        images = cls.objects.all()
+        return images
+
+    @classmethod
+    def update_image(cls, old, new):
+        cap = Image.objects.filter(caption=old).update(caption=new)
+        return cap
+
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+
+    def save_image(self):
+        self.save()
+
+    def delete_image(self):
+        self.delete()
+
+    def __str__(self):
+        return self.name
+
 class Follow(models.Model):
     follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='following')
     followed = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='followers')
