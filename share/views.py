@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Image, Profile, Follow, Comment
+from .models import Image, Profile, Comment
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponseRedirect
@@ -35,7 +35,7 @@ def profile(request, username):
     user = User.objects.get(username=current_user.username)
     user_select = User.objects.get(username=username)
     if user_select == user:
-        return redirect('instagram:profile', username=request.user.username)
+        return redirect('profile', username=request.user.username)
 
     posts = Image.objects.filter(user=user_select.id)
 
@@ -82,7 +82,7 @@ def comment(request, id):
     return render(request, 'post.html', context)
 
 
-def like_post(request, id):
+def like_video(request, id):
     post = Image.objects.get(pk=id)
     is_liked = False
     user = request.user.profile
@@ -152,18 +152,11 @@ def user_profile(request, username):
         return redirect('profile', username=request.user.username)
     user_posts = user_prof.profile.images.all()
 
-    followers = Follow.objects.filter(followed=user_prof.profile)
-    follow_status = None
-    for follower in followers:
-        if request.user.profile == follower.follower:
-            follow_status = True
-        else:
-            follow_status = False
+
     context = {
         'user_prof': user_prof,
         'user_posts': user_posts,
-        'followers': followers,
-        'follow_status': follow_status
+
     }
     return render(request, 'user_profile.html', context)
 
