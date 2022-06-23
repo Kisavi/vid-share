@@ -14,7 +14,7 @@ urlpatterns = [
     path('index', views.sign_up, name='index'),
     # path('image/', views.post, name='post'),
     path('like/<id>', views.like_video, name='like'),
-    path('image/<id>', views.comment, name='comment'),
+    path('video/<id>', views.comment, name='comment'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
 
   
