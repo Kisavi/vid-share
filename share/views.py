@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 from .forms import UploadForm, ProfileForm, CommentForm, RegisterForm
 from django.urls.base import reverse
 from django.http.response import Http404
+from django.contrib import messages
 
 
 # Create your views here.
@@ -14,40 +15,22 @@ def sign_up(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'{username}, your account has been created successfully')
             return redirect('/login')
     else:
         form = RegisterForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 
+def welcome(request):
+    return render(request, 'welcome.html')
+
+
 def index(request):
     images = Image.images()
     users = User.objects.exclude(id=request.user.id)
-    context = {
-        "users": users,
-        "images": images[::1]
-    }
-    return render(request, 'index.html', context)
-
-
-def profile(request, username):
-    current_user = request.user
-    user = User.objects.get(username=current_user.username)
-    user_select = User.objects.get(username=username)
-    if user_select == user:
-        return redirect('profile', username=request.user.username)
-
-    posts = Image.objects.filter(user=user_select.id)
-
-    ctx = {
-        "posts": posts,
-        "profile": profile,
-        'user': user,
-    }
-    return render(request, 'main/profile.html', ctx)
-
-
-def post(request):
+    # messages.success(request, f'{request.user.username}, you have been successfully logged in.')
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         print(form.errors)
@@ -58,7 +41,26 @@ def post(request):
             return redirect('landing')
     else:
         form = UploadForm()
-    return render(request, 'post_image.html', {"form": form})
+    context = {
+        "users": users,
+        "images": images[::1],
+        "form": form
+    }
+    return render(request, 'index.html', context)
+
+
+# def post(request):
+#     if request.method == 'POST':
+#         form = UploadForm(request.POST, request.FILES)
+#         print(form.errors)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.user = request.user.profile
+#             post.save()
+#             return redirect('landing')
+#     else:
+#         form = UploadForm()
+#     return render(request, 'post_image.html', {"form": form})
 
 
 def comment(request, id):
@@ -110,9 +112,11 @@ def profile(request, username):
             return HttpResponseRedirect(request.path_info)
     else:
         prof_form = ProfileForm(instance=request.user.profile)
+        form = UploadForm()
     context = {
         'prof_form': prof_form,
         'images': images,
+        'form': form,
     }
     return render(request, 'profile.html', context)
 
@@ -124,6 +128,7 @@ def update_profile(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
+            messages.success(request, 'You have successfully updated your profile')
             return redirect('profile')
     else:
         form = ProfileForm()
@@ -136,14 +141,18 @@ def search_profile(request):
         results = Profile.search_profile(name)
         print(results)
         message = name
+        form = UploadForm()
         params = {
             'results': results,
-            'message': message
+            'message': message,
+            'form': form
         }
         return render(request, 'results.html', params)
     else:
+        form = UploadForm()
         message = "You did not make a selection"
-    return render(request, 'results.html', {'message': message})
+
+    return render(request, 'results.html', {'message': message, 'form': form})
 
 
 def user_profile(request, username):
@@ -151,18 +160,12 @@ def user_profile(request, username):
     if request.user == user_prof:
         return redirect('profile', username=request.user.username)
     user_posts = user_prof.profile.images.all()
-
+    form = UploadForm()
 
     context = {
         'user_prof': user_prof,
         'user_posts': user_posts,
+        'form': form
 
     }
     return render(request, 'user_profile.html', context)
-
-
-
-
-
-
-

@@ -47,31 +47,6 @@ class Profile(models.Model):
         return cls.objects.filter(user__username__icontains=name).all()
 
 
-# class Video(models.Model):
-#     user = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='videos')
-#     video = models.FileField(upload_to='videos/', storage=VideoMediaCloudinaryStorage(), validators=[validate_video])
-#     caption = models.CharField(max_length=70)
-#     pub_date = models.DateTimeField(auto_now_add=True, null=True)
-#     likes = models.ManyToManyField(User, related_name='likes', blank=True)
-#
-#     class Meta:
-#         ordering = ['-pk']
-#
-#     @classmethod
-#     def videos(cls):
-#         videos = cls.objects.all()
-#         return videos
-#
-#     def save_video(self):
-#         self.save()
-#
-#     def delete_video(self):
-#         self.delete()
-#
-#     def __str__(self):
-#         return self.caption
-
-
 class Image(models.Model):
     user = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='images')
 
@@ -106,14 +81,6 @@ class Image(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# class Follow(models.Model):
-#     follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='following')
-#     followed = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='followers')
-#
-#     def __str__(self):
-#         return f'{self.follower} Follow'
 
 
 class Comment(models.Model):

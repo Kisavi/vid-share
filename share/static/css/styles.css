@@ -1,4 +1,8 @@
   @import url('//fonts.cdnfonts.com/css/billabong');
+  body {
+  background-color: #f0f9ff;
+  }
+
   .logo a {
   color: #000000;
   font-size: 30px;
@@ -18,4 +22,40 @@ display: flex;}
 .heart:hover {
   color: blue !important;
 }
+
+.jumbotron {
+  position: relative;
+  overflow: hidden;
+  background-color:black;
+  height: 100vh;
+  overflow-y: hidden;
+}
+.jumbotron video {
+  position: absolute;
+  z-index: 0.5;
+  top: 0;
+  width:100%;
+  height:100%;
+  /*  object-fit is not supported on IE  */
+  object-fit: cover;
+  opacity:1;
+}
+.jumbotron .container {
+  z-index: 2;
+  position: relative;
+}
+
+#footer {
+  color: #444444;
+  font-size: 14px;
+  background: #f1f0f2;
+  background-color: #e3f2fd;
+}
+
+#footer .credits {
+  padding-top: 5px;
+  font-size: 13px;
+  color: #444444;
+}
+
 
