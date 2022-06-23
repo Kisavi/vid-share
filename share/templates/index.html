@@ -15,27 +15,29 @@
 {% block content %}
 {{ block.super }}
 
-<div class="container" style="font-family: 'Italic', cursive; ">
+<div class="container-fluid" style="margin-top: 5rem;">
     <div class="row">
-        <div class="col-7">
-            {% for image in images %}
-            <div class="card" style="width: 30rem; margin-top: 20px;">
-                <div class="card-title">
+        {% for image in images %}
+        <div class="col-md-4 d-flex"
+            style="justify-content: space-evenly !important; align-items: center !important; gap: 20px !important;">
+            <div class="card" style="width: 30rem;">
+                <video class="embed-responsive embed-responsive-16by9" controls="controls">
+                    <source style="height: 40rem;" src="{{image.image.url}}" type="video/mp4" />
+                </video>
+                 <div class="card-title">
                     <img src="{{image.user.photo.url}}" class="rounded-circle border ml-3 mt-2  mr-3"
                          alt="{{image.user.user.username}}" width="35" height="35">
                     <a href="{% url 'user_profile' image.user.user.username  %}" class="mt-4 user" style="color: blue; font-weight: bold;">{{image.user.user.username|title}}</a>
                 </div>
                 <div class="card-body">
-                    <a href="{% url 'comment' image.id %}"><img src="{{ image.image_url }}" class="card-img-top"
-                            alt="..." height="320px" style="width: 100%; color: black;"></a>
                     <div class="reaction mt-2 ">
-                        
+
                         <a href="{%url 'like' image.id %}" class="heart mr-3">
                             <i class='bx bxs-heart bx-border-circle'></i>
 
                         </a>
-                        
-                            
+
+
                         <a href="{% url 'comment' image.id %}" class="engage ">
                             <i class='bx-sm bx bx-comment'></i>
                         </a>
@@ -48,27 +50,10 @@
 
                 </div>
             </div>
-            {% endfor %}
         </div>
-        <div class="col-4" style="margin-top: 20px;">
-            <h4 style="color:inherit">Suggestions for you</h4>
-            {% for user in users %}
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2 mr-3 mt-1 mb-2">
-                        <!-- <img class="rounded-circle" src="{{ user.profile.photo.url }}" width="45px" height="45px"> -->
-                    </div>
-                    <div class="col-md-6 mr-2 mt-2">
-                        <span><a style="color:rgb(37, 194, 45)" href="{% url 'user_profile' user.username  %}">{{ user.username }}</a></span>
-                    </div>
-                    <div class="col-md-4">
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
+        {% endfor %}
     </div>
 </div>
+
 
 {% endblock %}
