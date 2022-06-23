@@ -33,15 +33,24 @@
                     </div>
                 </form>
             </div>
+
+
+
             <div class="col-md-3 mt-2">
-                <img src="{{image.user.photo.url}}" class="rounded-circle border ml-3 mt-2  mr-3"
+                  <img src="{{image.user.photo.url}}" class="rounded-circle border ml-3 mt-2  mr-3"
                     alt="{{image.user.user.username}}" width="35" height="35">
                 <a href="{% url 'profile' image.user.user.username %}"
                     class="mt-4 user">{{image.user.user.username | title}}</a>
-                <p class="mt-3">{{comments.count}} comments</p>
-                 <p class="text-muted font-italic">{{image.pub_date}}</p>
+                <div class="card-body">
 
-                <hr style="width:96%">
+                    <a href="{% url 'profile' image.user.user.username  %}" class="mt-4 user text-dark">
+                        <p><strong>{{image.user.user.username|title}}</strong></a> <span class="card-text">{{ image.caption }}</span> </p>
+                    <p>{{user.comment.comments.count}}</p>
+
+                    <p class="text-muted font-cursive">{{image.pub_date}}</p>
+
+                     <p class=""style="margin-top: 4rem;">{{comments.count}} comments</p>
+                    <hr style="width:96%">
 
                 {% for comment in comments %}
                 <div>
@@ -52,6 +61,13 @@
                 {% empty %}
                 <p class="ml-3">No comments here yet</p>
                 {% endfor %}
+
+                </div>
+
+
+
+
+
 
             </div>
             <div class="col-md-1"></div>

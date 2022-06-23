@@ -15,7 +15,7 @@
 {% block content %}
 {{ block.super }}
 
-<div class="container-fluid" style="margin-top: 5rem;">
+<div class="container-fluid" style="margin-top: 3rem;">
     <div class="row">
         {% for image in images %}
         <div class="col-md-4 d-flex mb-4"
@@ -24,28 +24,35 @@
                 <video class="embed-responsive embed-responsive-16by9" controls="controls">
                     <source style="height: 40rem;" src="{{image.image.url}}" type="video/mp4" />
                 </video>
-                 <div class="card-title">
-                    <img src="{{image.user.photo.url}}" class="rounded-circle border ml-3 mt-2  mr-3"
+                 <div class="" style="display: flex; justify-content: space-between">
+                     <div class="det">
+                    <img src="{{image.user.photo.url}}" class="rounded-circle border ml-3 mt-2  mr-1"
                          alt="{{image.user.user.username}}" width="35" height="35">
                     <a href="{% url 'user_profile' image.user.user.username  %}" class="mt-4 user" style="color: blue; font-weight: bold;">{{image.user.user.username|title}}</a>
-                </div>
-                <div class="card-body">
-                    <div class="reaction mt-2 ">
+                     </div>
+                     <div class="reaction mt-2 mr-2">
 
-                        <a href="{%url 'like' image.id %}" class="heart mr-3">
-                            <i class='bx bxs-heart bx-border-circle'></i>
-
-                        </a>
-
-
-                        <a href="{% url 'comment' image.id %}" class="engage ">
+                           <a href="{% url 'comment' image.id %}" class="engage ">
                             <i class='bx-sm bx bx-comment'></i>
                         </a>
+
+                        <a href="{%url 'like' image.id %}" class="heart mr-1">
+                            <i class='bx bx-like bx-sm'
+                            style="font-size: 1.2rem; margin-left: 0.6rem;"></i>
+                        </a>
+                          <h5>{{image.likes.count}} likes</h5>
+
+
+
+
                     </div>
+                </div>
+                <div class="card-body">
+
                     <a href="{% url 'profile' image.user.user.username  %}" class="mt-4 user text-dark">
-                        <p><strong>{{image.user.user.username|title}}</strong></a> <span class="card-text">{{ image.caption }}</span> </p>
+                        <p></a> <span class="card-text">{{ image.caption }}</span> </p>
                     <p>{{user.comment.comments.count}}</p>
-                    <h5>{{image.likes.count}} likes</h5>
+
                     <p class="text-muted font-cursive">{{image.pub_date}}</p>
 
                 </div>
