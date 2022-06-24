@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'cloudinary',
     'cloudinary_storage',
+    'social_django'
 ]
 
 MIDDLEWARE = [

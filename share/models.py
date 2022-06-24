@@ -80,7 +80,7 @@ class Image(models.Model):
         self.delete()
 
     def __str__(self):
-        return self.name
+        return self.caption
 
 
 class Comment(models.Model):
